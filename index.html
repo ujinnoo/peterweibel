@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peter Weibel</title>
+    <style>
+        html, body { overflow-x: hidden; }
+        body { margin: 0; padding: 0; } 
+        a { color: white; text-decoration: none; } 
+        a:hover { text-decoration: underline; !important; } 
+        header { overflow: hidden; transition: all 1s; height: 90px; background-color: rgba(0, 0, 0); position: fixed; top: 0; left: 0; width: 100% } 
+        header nav, ul, li { display: flex; color: white; float: right; list-style-type: none; margin: 11px 20px 0 20px; font-weight: bold;}
+        header h1 { margin-left: 45px; }
+        header.over nav a {color: black; float: right; display: flex; display: inline; font-weight: bold;}
+        header.over { background-color: white; } 
+        header.over h1 a { color: black; } 
+        /* header:hover { background-color: white; opacity: 30%; } */
+        section { height: 100vh; background-color: rgb(0, 0, 0); } 
+        section:nth-of-type(1) { background-image: url(img/bg.jpg); background-size: cover; } 
+        section:nth-of-type(even) { background-color: rgb(0, 0, 0); padding-top: 200px;} 
+        footer { color: white; background-color: rgb(0, 0, 0); height: 100px; text-align: right; padding: 50px 30px 0 0; margin-top: 1px;} 
+        .image-container { display: flex; height: 500px; position: relative; justify-content: center;}
+        .image-container img { position: absolute; bottom: -300px; opacity: 0; transition: all 1s ease-in-out; }
+        .image-container img.visible { bottom: 0; opacity: 1; }
+        .scroll-to-top {left: 50%; transform: translateX(50%); display: flex; border-radius: 50%; cursor: pointer; padding-top: 150px;}
+        .scroll-to-top img { width: 40px; }
+</style>
+</head>
+
+<body>
+    <header id="header">
+        <nav>
+            <ul>
+                <li><a href="#">작가소개</a></li>
+                <li><a href="#">작품소개</a></li>
+                <li><a href="#">전시회</a></li>
+            </ul>
+        </nav>
+        <h1><a href="">페터바이벨</a></h1>
+    </header>
+    <section></section>
+    <section>
+        <div class="image-container">
+            <img class="hidden" src="img/art.jpg" width="1200px">
+        </div>
+        <div class="scroll-to-top" id="top">
+            <img src="img/up.png">
+        </div>        
+        </section>
+    <footer>Copyright ⓒ 2023 Yujin Lee, All Right Reserved <br>
+        javascript programming D 22261085 이유진 ｜ dbwlssn@kakao.com</footer>
+
+    <script>
+        var myHeader = document.getElementById("header");
+        // console.log(document.getElementById("header"));
+        myHeader.onmouseover = function () {
+            console.log("this");
+            console.log("myHeader");
+            this.classList.add("over");
+            // document.getElementById("header").style.backgroundColor = "white";            
+            // myHeader.style.backgroundColor = "white";            
+            // this.style.backgroundColor = "white";            
+        }
+        myHeader.onmouseout = function () {
+            this.classList.remove("over");
+            // this.style.backgroundColor = "rgba(0,0,0,0.5)";
+        }
+
+        // 스크롤 이벤트
+        window.addEventListener("scroll", function () {
+            console.log(window.scrollY);
+            if (window.scrollY > 200) {
+                console.log("200 이상");
+                // myHeader.style.height = 0 + "px";
+                // myHeader.style.display ="none";
+                myHeader.style.top = -100 + "px";
+            } else {
+                console.log("200 이하");
+                // myHeader.style.height = 100 + "px";
+                // myHeader.style.display ="";
+                myHeader.style.top = 0 + "px";
+            }
+        });
+
+        // 이미지 올라오는 스크립트
+            const image = document.querySelector('.image-container img');
+            const imageContainer = document.querySelector('.image-container');
+            function checkPosition() {
+                const position = window.scrollY + window.innerHeight;
+                if (position > imageContainer.offsetTop && !image.classList.contains('visible')) {
+                    image.classList.add('visible');
+                }}
+            window.addEventListener('scroll', checkPosition);
+
+        // 스크롤탑 버튼
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        const button = document.getElementById('top');
+        button.addEventListener('click', scrollToTop);
+    </script>
+</body>
+
+</html>
